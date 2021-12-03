@@ -5,7 +5,7 @@ Laravel all sql queries and eloquent quires
     
 **Use DB::table('table_name') or Model:: for all quires **  
   
- #INSERT: 
+ #### #INSERT: 
 
         1)  $data['email']  =  'kayla@example.com';
             $data['status']  =  1;
@@ -33,7 +33,7 @@ Laravel all sql queries and eloquent quires
         protected $fillable = ['name','mobile']; //In model 
         protected $guarded = []; // set empty for mass assignment.
     
- #UPDATE: 
+  #### #UPDATE: 
 
         1) $update = DB::table('users')->where('id', 1)->update(['votes' => 1]);
         2) $update = DB::table('users')
@@ -44,33 +44,33 @@ Laravel all sql queries and eloquent quires
         //create or update
         3) DB::table('flights')->upsert($data, ['email']); //check with email
 
-#DELETE:
+ #### #DELETE:
 
         1) DB::table('users')->delete();
         2) DB::table('users')->where('id', 100)->delete();
         3) DB::table('users')->truncate(); //Empty the table and increment values set 0
         
-#ALL RECORDS:
+ #### #ALL RECORDS:
 
         1) DB::table('users')->get();
         2) User::all(); //using eloquent model
         3) DB::table('users')->select('*')->get();
         4) DB::table('users')->select('name','id','marks as user_marks')->get();
 
-#USING WHERE: 
+ #### #USING WHERE: 
 
         1) DB::table('users')->where('id',1)->first();
         2) User::where('status',1)->get();
         3) User::firstWhere('active', 1);
         4) User::where('marks', '>', 50)->firstOrFail();
 
-#USING FIND:
+ #### #USING FIND:
 
         1) User::find(3); //using primary key
         2) DB::table('users')->find(3);
         3) User::findOrFail(1); //return exception if not found 
 
-#RAW QUERIES:
+ #### #RAW QUERIES:
 
         1) DB::table('orders')->whereRaw('price > IF(state = "TX", ?, 100)', [200])->get();
         
@@ -97,7 +97,7 @@ Laravel all sql queries and eloquent quires
                     ->get();
 
 
-#JOINS:
+ #### #JOINS:
 
         1) $users = DB::table('users as t1')
                     ->join('contacts as t2', 't1.id', '=', 't2.user_id')
@@ -117,7 +117,7 @@ Laravel all sql queries and eloquent quires
                     ->crossJoin('colors')
                     ->get();
 
-#WHERE EXAMPLES:
+ #### #WHERE EXAMPLES:
 
         1) $users = DB::table('users')
                     ->where('name', 'like', '%'.$name.'%')
@@ -134,22 +134,22 @@ Laravel all sql queries and eloquent quires
                     ->get();
 
 
-#WHERE BETWEEN:
+ #### #WHERE BETWEEN:
 
         1) $users = DB::table('users')->whereBetween('votes', [1, 100])->get();
         2) $users = DB::table('users')->whereNotBetween('votes', [1, 100])->get();
 
-#WHERE IN & NOT IN:
+ #### #WHERE IN & NOT IN:
 
         1) $users = DB::table('users')->whereIn('id', [1, 2, 3])->get();
         2) $users = DB::table('users')->whereNotIn('id', [1, 2, 3])->get();
 
-#WHERE NULL & NOT NULL:
+ #### #WHERE NULL & NOT NULL:
 
         1) $users = DB::table('users')->whereNull('updated_at')->get();
         2) $users = DB::table('users')->whereNotNull('updated_at')->get();
 
-#DATES:
+ #### #DATES:
 
         1) $users = DB::table('users')->whereDate('created_at', '2016-12-31')->get();
         2) $users = DB::table('users')->whereMonth('created_at', '12')->get();
@@ -157,11 +157,11 @@ Laravel all sql queries and eloquent quires
         4) $users = DB::table('users')->whereYear('created_at', '2016')->get();
         5) $users = DB::table('users')->whereTime('created_at', '=', '11:20:45')->get();
 
-#Two columns equal or not:
+ #### #Two columns equal or not:
 
         1) $users = DB::table('users')->whereColumn('first_name','=','last_name')->get();
 
-#ORDER BY:
+ #### #ORDER BY:
 
         1) $users = DB::table('users')->orderBy('name', 'desc')->get();
         1) $users = DB::table('users')->orderBy('name', 'asc')->get();
@@ -169,8 +169,8 @@ Laravel all sql queries and eloquent quires
         2) $user = DB::table('users')->latest()->get(); #order by default created_at 
         2) $user = DB::table('users')->oldest()->first();  #order by default created_at
 
-#HAVING & GROUPBY:
-
+ #### #HAVING & GROUPBY:
+    
         1) $users = DB::table('users')
                         ->groupBy('account_id')
                         ->having('account_id', '>', 100)
@@ -187,12 +187,12 @@ Laravel all sql queries and eloquent quires
                     ->having('account_id', '>', 100)
                     ->get();
 
-#Limit & Offset:
+ #### #Limit & Offset:
 
         1) $users = DB::table('users')->offset(10)->limit(5)->get();
         2) $users = DB::table('users')->skip(10)->take(5)->get();
 
-#WHEN:
+ #### #WHEN:
 
         Used for multiple conditions at a time. WHEN method only executes the given closure when the first argument is true.
 
